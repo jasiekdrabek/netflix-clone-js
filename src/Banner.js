@@ -1,32 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Banner.css";
+import axios from "./axios";
+import requests from "./Requests";
 
 function Banner() {
+  const [movie, setMovie] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const request = await axios.get(requests.fetchNetflixOriginals);
+        console.table(request);
+      setMovie(
+        request.data.results[
+          Math.floor(Math.random() * request.data.results.length - 1)
+        ]
+      );
+      return request;
+    }
+    fetchData();
+  }, []);
   var buttonDescription = document.getElementById("description-button");
   function truncate(string, n) {
-    return string?.length > n ? string.substr(0, n - 1) + "..." : string  ;
+    return string?.length > n ? string.substr(0, n - 1) + "..." : string;
   }
   function buttonDescriptionClick() {
     buttonDescription = document.getElementById("description-button");
     var description = document.getElementById("description");
+    console.log(buttonDescription?.textContent);
     if (buttonDescription?.textContent === "see more") {
       buttonDescription.textContent = "see less";
-      description.textContent = `DescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescripton
-      DescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescripton
-      DescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescripton
-      DescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescripton
-      DescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescripton
-       DescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescripton
-       DescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescripton
-       DescriptonDescriptonDescripton`;
+      description.textContent = movie.overview;
     } else {
       if (buttonDescription) {
         buttonDescription.textContent = "see more";
         description.textContent = truncate(
-          `DescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescripton
-            DescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescripton
-            DescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescripton
-            DescriptonDescriptonDescripton`,
+          movie.overview,
           150
         );
       }
@@ -37,27 +45,24 @@ function Banner() {
       className="banner"
       style={{
         backgroundSize: "cover",
-        backgroundImage: `url("https://assets.vogue.in/photos/627cb0eaecb3436d3f16f9fe/16:9/w_1280,c_limit/netflix-series-2019-roster-1.png")`,
+        backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,
         backgroundPosition: "center center",
       }}
     >
       <div className="banner__content">
-        <h1 className="banner__title">Movie name</h1>
+        <h1 className="banner__title">{movie?.name}</h1>
         <div className="banner__buttons">
           <button className="banner__button">Play</button>
           <button className="banner__button">My list</button>
         </div>
         <h1 className="description__content">
-          <div id="description" className="banner__description" onClick={buttonDescriptionClick}>
+          <div
+            id="description"
+            className="banner__description"
+            onClick={buttonDescriptionClick}
+          >
             {truncate(
-              `DescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescripton
-              DescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescripton
-              DescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescripton
-              DescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescripton
-              DescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescripton
-               DescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescripton
-               DescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescriptonDescripton
-               DescriptonDescriptonDescripton`,
+              movie?.overview,
               150
             )}
           </div>
@@ -66,9 +71,9 @@ function Banner() {
             onClick={buttonDescriptionClick}
             id="description-button"
           >
+            see more
           </button>
         </h1>
-        
       </div>
       <div className="banner--fadeBottom" />
     </header>
