@@ -29,11 +29,14 @@ function Banner() {
     console.log(buttonDescription?.textContent);
     if (buttonDescription?.textContent === "see more") {
       buttonDescription.textContent = "see less";
+      // @ts-ignore
       description.textContent = movie.overview;
     } else {
       if (buttonDescription) {
         buttonDescription.textContent = "see more";
+        // @ts-ignore
         description.textContent = truncate(
+          // @ts-ignore
           movie.overview,
           150
         );
@@ -45,12 +48,15 @@ function Banner() {
       className="banner"
       style={{
         backgroundSize: "cover",
+        // @ts-ignore
         backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,
         backgroundPosition: "center center",
       }}
     >
       <div className="banner__content">
-        <h1 className="banner__title">{movie?.name}</h1>
+        <h1 className="banner__title">{movie?.
+// @ts-ignore
+        name || movie?.title || movie?.original_name }</h1>
         <div className="banner__buttons">
           <button className="banner__button">Play</button>
           <button className="banner__button">My list</button>
@@ -62,6 +68,7 @@ function Banner() {
             onClick={buttonDescriptionClick}
           >
             {truncate(
+              // @ts-ignore
               movie?.overview,
               150
             )}
