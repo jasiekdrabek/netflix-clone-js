@@ -9,7 +9,6 @@ function Row({ title, fetchUrl, isLargeRow = false }) {
     async function fetchData() {
       const request = await axios.get(fetchUrl);
       var results = request.data.results;
-      results.splice(10, 1);
       setMovies(results);
       return request;
     }
