@@ -1,6 +1,6 @@
 #App deploy on firebase
 
-[netflix-clone-2910e.web.app]
+[netflix-clone-2910e.web.app](netflix-clone-2910e.web.app)
 
 
 # Getting Started with Create React App
