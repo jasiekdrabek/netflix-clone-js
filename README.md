@@ -1,4 +1,4 @@
-#App deploy on firebase
+# App deploy on firebase
 
 [netflix-clone-2910e.web.app](https://netflix-clone-2910e.web.app)
 
