@@ -4,9 +4,9 @@ import ClickMovie from "./ClickMovie";
 import "./Row.css";
 import shuffleArray from "./shuffleArray";
 
-function Row({ title, fetchUrl}) {
+function Row({ title, fetchUrl }) {
   const [movies, setMovies] = useState([]);
-  const [click, setClick] = useState('');
+  const [click, setClick] = useState("");
   useEffect(() => {
     async function fetchData() {
       if (Array.isArray(fetchUrl)) {
@@ -16,7 +16,7 @@ function Row({ title, fetchUrl}) {
           request = await axios.get(fetchUrl[i]);
           results = results.concat(request.data.results);
         }
-      }else{
+      } else {
         request = await axios.get(fetchUrl);
         results = request.data.results;
       }
@@ -25,13 +25,13 @@ function Row({ title, fetchUrl}) {
     }
     fetchData();
   }, [fetchUrl]);
-  const handleClick = movie => {
-    if(click){
-      setClick('');
-    }else{
+  const handleClick = (movie) => {
+    if (click) {
+      setClick("");
+    } else {
       setClick(movie);
     }
-  }
+  };
 
   return (
     <div className="row">
@@ -40,26 +40,25 @@ function Row({ title, fetchUrl}) {
         {movies.map(
           (movie) =>
             // @ts-ignore
-            
-              (movie.backdrop_path) && (movie.poster_path) && (
+
+            movie.backdrop_path &&
+            movie.poster_path && (
               <img
                 className={`row__poster `}
                 // @ts-ignore
                 key={movie.id}
-                onClick ={() => handleClick(movie)}
+                onClick={() => handleClick(movie)}
                 src={
-                  
-                      // @ts-ignore
-                      `https://image.tmdb.org/t/p/w300/` + movie.poster_path
+                  // @ts-ignore
+                  `https://image.tmdb.org/t/p/w300/` + movie.poster_path
                 }
                 alt=""
               />
             )
         )}
       </div>
-      {click && <ClickMovie movie={click}/>} 
+      {click && <ClickMovie movie={click} />}
     </div>
-    
   );
 }
 
