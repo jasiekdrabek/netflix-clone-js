@@ -6,15 +6,21 @@ import requests from "./Requests";
 function Banner() {
   const [movie, setMovie] = useState([]);
 
+var result;
   useEffect(() => {
-    async function fetchData() {
+    async function fetchData() {     
       const request = await axios.get(requests.fetchNetflixOriginals[0]);
+result = request.data.results[
+  Math.floor(Math.random() *( request.data.results.length - 1))
+]
       setMovie(
-        request.data.results[
-          Math.floor(Math.random() * request.data.results.length - 1)
-        ]
+        result
       );
+      if (result.backdrop_path == null){
+        setMovie(request.data.results[0])
+      }
       return request;
+      
     }
     fetchData();
   }, []);
