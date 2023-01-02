@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "./axios";
+import ClickMovie from "./ClickMovie";
 import "./Row.css";
 import shuffleArray from "./shuffleArray";
 
-function Row({ title, fetchUrl, isLargeRow = false }) {
+function Row({ title, fetchUrl}) {
   const [movies, setMovies] = useState([]);
+  const [click, setClick] = useState('');
   useEffect(() => {
     async function fetchData() {
       if (Array.isArray(fetchUrl)) {
@@ -23,6 +25,14 @@ function Row({ title, fetchUrl, isLargeRow = false }) {
     }
     fetchData();
   }, [fetchUrl]);
+  const handleClick = movie => {
+    if(click){
+      setClick('');
+    }else{
+      setClick(movie);
+    }
+  }
+
   return (
     <div className="row">
       <h2>{title}</h2>
@@ -30,26 +40,26 @@ function Row({ title, fetchUrl, isLargeRow = false }) {
         {movies.map(
           (movie) =>
             // @ts-ignore
-            ((isLargeRow && movie.poster_path) ||
-              // @ts-ignore
-              (!isLargeRow && movie.backdrop_path)) && (
+            
+              (movie.backdrop_path) && (movie.poster_path) && (
               <img
-                className={`row__poster ${isLargeRow && "row__posterLarge"}`}
+                className={`row__poster `}
                 // @ts-ignore
                 key={movie.id}
+                onClick ={() => handleClick(movie)}
                 src={
-                  isLargeRow
-                    ? // @ts-ignore
-                      `https://image.tmdb.org/t/p/w342/` + movie.poster_path
-                    : // @ts-ignore
-                      `https://image.tmdb.org/t/p/w300/` + movie.backdrop_path
+                  
+                      // @ts-ignore
+                      `https://image.tmdb.org/t/p/w300/` + movie.poster_path
                 }
                 alt=""
               />
             )
         )}
       </div>
+      {click && <ClickMovie movie={click}/>} 
     </div>
+    
   );
 }
 
