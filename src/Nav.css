@@ -10,26 +10,46 @@
 }
 
 .nav__content {
-  display: flex;
+  display: inline-flex;
+  float: left;
   justify-content: space-between;
 }
 
 .nav__logo {
-  position: fixed;
   left: 0;
   width: 80px;
   object-fit: contain;
-  cursor: pointer;
-  padding-left: 20px;
 }
 
 .nav__avatar {
   position: fixed;
   right: 20px;
   width: 30px;
-  cursor: pointer;
 }
 
 .nav__black {
   background-color: #111;
+}
+
+.nav:hover {
+  background-color: #111;
+}
+
+.nav__element {
+  padding-left: 20px;
+  padding-right: 20px;
+  cursor: pointer;
+  display: inline;
+}
+
+.nav__hidden {
+  display: none;
+}
+
+.nav:hover .nav__hidden {
+  display: inline;
+}
+
+.nav__black .nav__hidden {
+  display: inline;
 }
