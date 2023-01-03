@@ -3,14 +3,13 @@ import "./Banner.css";
 import axios from "./axios";
 import requests from "./Requests";
 
-function Banner() {
+function Banner({ number = 0 }) {
   const [movie, setMovie] = useState([]);
 
-  
   useEffect(() => {
     var result;
     async function fetchData() {
-      const request = await axios.get(requests.fetchNetflixOriginals[0]);
+      const request = await axios.get(requests.fetchNetflixOriginals[number]);
       result =
         request.data.results[
           Math.floor(Math.random() * (request.data.results.length - 1))
@@ -22,7 +21,7 @@ function Banner() {
       return request;
     }
     fetchData();
-  }, []);
+  }, [number]);
   var buttonDescription = document.getElementById("description-button");
   function truncate(string, n) {
     return string?.length > n ? string.substr(0, n - 1) + "..." : string;
