@@ -6,8 +6,9 @@ import requests from "./Requests";
 function Banner() {
   const [movie, setMovie] = useState([]);
 
-  var result;
+  
   useEffect(() => {
+    var result;
     async function fetchData() {
       const request = await axios.get(requests.fetchNetflixOriginals[0]);
       result =

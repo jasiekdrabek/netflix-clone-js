@@ -12,7 +12,7 @@ function ClickMovie({ movie1 }) {
     return string?.length > n ? string.substr(0, n - 1) + "..." : string;
   }
 
-  function ButtonClick() {}
+  function buttonClick() {}
 
   return (
     <header
@@ -36,7 +36,7 @@ function ClickMovie({ movie1 }) {
           }
         </h1>
         <div className="banner__buttons">
-          <button className="banner__button" onClick={ButtonClick}>
+          <button className="banner__button" onClick={buttonClick}>
             Play
           </button>
           <button className="banner__button">My list</button>
