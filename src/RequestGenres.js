@@ -1,89 +1,180 @@
 import shuffleArray from "./shuffleArray";
 // //normaly API_KEY should be hidden
 const API_KEY = "eb99eb0287033e0ff37b93fabaef3c62";
+const region = "US";
+const watchProviders ="8";
 let requestGenres = [
   {
     Name: "ACTION",
-    Url: [`/discover/movie?api_key=${API_KEY}&with_genres=28`],
+    Url: [
+      `/discover/movie?api_key=${API_KEY}&with_genres=28&with_watch_providers=${watchProviders}&watch_region=${region}`,
+    ],
   },
   {
     Name: "ANIMATION",
     Url: [
-      `/discover/movie?api_key=${API_KEY}&with_genres=16`,
-      `/discover/tv?api_key=${API_KEY}&with_genres=16`,
+      `/discover/movie?api_key=${API_KEY}&with_genres=16&with_watch_providers=${watchProviders}&watch_region=${region}`,
+      `/discover/tv?api_key=${API_KEY}&with_genres=16&with_watch_providers=${watchProviders}&watch_region=${region}S`,
     ],
   },
   {
     Name: "ADVENTURE",
-    Url: [`/discover/movie?api_key=${API_KEY}&with_genres=12`],
+    Url: [
+      `/discover/movie?api_key=${API_KEY}&with_genres=12&with_watch_providers=${watchProviders}&watch_region=${region}`,
+    ],
   },
   {
     Name: "COMEDY",
     Url: [
-      `/discover/movie?api_key=${API_KEY}&with_genres=35`,
-      `/discover/tv?api_key=${API_KEY}&with_genres=35`,
+      `/discover/movie?api_key=${API_KEY}&with_genres=35&with_watch_providers=${watchProviders}&watch_region=${region}`,
+      `/discover/tv?api_key=${API_KEY}&with_genres=35&with_watch_providers=${watchProviders}&watch_region=${region}`,
     ],
   },
   {
     Name: "CRIME",
     Url: [
-      `/discover/movie?api_key=${API_KEY}&with_genres=80`,
-      `/discover/tv?api_key=${API_KEY}&with_genres=80`,
+      `/discover/movie?api_key=${API_KEY}&with_genres=80&with_watch_providers=${watchProviders}&watch_region=${region}`,
+      `/discover/tv?api_key=${API_KEY}&with_genres=80&with_watch_providers=${watchProviders}&watch_region=${region}`,
     ],
   },
   {
     Name: "DOCUMENTARY",
     Url: [
-      `/discover/movie?api_key=${API_KEY}&with_genres=99`,
-      `/discover/tv?api_key=${API_KEY}&with_genres=99`,
+      `/discover/movie?api_key=${API_KEY}&with_genres=99&with_watch_providers=${watchProviders}&watch_region=${region}`,
+      `/discover/tv?api_key=${API_KEY}&with_genres=99&with_watch_providers=${watchProviders}&watch_region=${region}`,
     ],
   },
   {
     Name: "DRAMA",
     Url: [
-      `/discover/movie?api_key=${API_KEY}&with_genres=18`,
-      `/discover/tv?api_key=${API_KEY}&with_genres=18`,
+      `/discover/movie?api_key=${API_KEY}&with_genres=18&with_watch_providers=${watchProviders}&watch_region=${region}`,
+      `/discover/tv?api_key=${API_KEY}&with_genres=18&with_watch_providers=${watchProviders}&watch_region=${region}`,
+    ],
+  },
+  {
+    Name: "FAMILY",
+    Url: [
+      `/discover/movie?api_key=${API_KEY}&with_genres=10751&with_watch_providers=${watchProviders}&watch_region=${region}`,
+      `/discover/tv?api_key=${API_KEY}&with_genres=10751&with_watch_providers=${watchProviders}&watch_region=${region}`,
+    ],
+  },
+  {
+    Name: "FANTASY",
+    Url: [
+      `/discover/movie?api_key=${API_KEY}&with_genres=14&with_watch_providers=${watchProviders}&watch_region=${region}`,
+    ],
+  },
+  {
+    Name: "HISTORY",
+    Url: [
+      `/discover/movie?api_key=${API_KEY}&with_genres=36&with_watch_providers=${watchProviders}&watch_region=${region}`,
+    ],
+  },
+  {
+    Name: "HORROR",
+    Url: [
+      `/discover/movie?api_key=${API_KEY}&with_genres=27&with_watch_providers=${watchProviders}&watch_region=${region}`,
+    ],
+  },
+  {
+    Name: "MUSIC",
+    Url: [
+      `/discover/movie?api_key=${API_KEY}&with_genres=10402&with_watch_providers=${watchProviders}&watch_region=${region}`,
+    ],
+  },
+  {
+    Name: "MYSTERY",
+    Url: [
+      `/discover/movie?api_key=${API_KEY}&with_genres=9648&with_watch_providers=${watchProviders}&watch_region=${region}`,
+      `/discover/tv?api_key=${API_KEY}&with_genres=9648&with_watch_providers=${watchProviders}&watch_region=${region}`,
+    ],
+  },
+  {
+    Name: "ROMACE",
+    Url: [
+      `/discover/movie?api_key=${API_KEY}&with_genres=10749&with_watch_providers=${watchProviders}&watch_region=${region}`,
+    ],
+  },
+  {
+    Name: "SCIENCE FICTION",
+    Url: [
+      `/discover/movie?api_key=${API_KEY}&with_genres=878&with_watch_providers=${watchProviders}&watch_region=${region}`,
+    ],
+  },
+  {
+    Name: "TV MOVIE",
+    Url: [
+      `/discover/movie?api_key=${API_KEY}&with_genres=10770&with_watch_providers=${watchProviders}&watch_region=${region}`,
+    ],
+  },
+  {
+    Name: "THRILLER",
+    Url: [
+      `/discover/movie?api_key=${API_KEY}&with_genres=53&with_watch_providers=${watchProviders}&watch_region=${region}`,
+    ],
+  },
+  {
+    Name: "WAR",
+    Url: [
+      `/discover/movie?api_key=${API_KEY}&with_genres=10752&with_watch_providers=${watchProviders}&watch_region=${region}`,
+    ],
+  },
+  {
+    Name: "WESTERN",
+    Url: [
+      `/discover/movie?api_key=${API_KEY}&with_genres=37&with_watch_providers=${watchProviders}&watch_region=${region}`,
+      `/discover/tv?api_key=${API_KEY}&with_genres=37&with_watch_providers=${watchProviders}&watch_region=${region}`,
+    ],
+  },
+  {
+    Name: "ACTION AND ADVENTURE",
+    Url: [
+      `/discover/tv?api_key=${API_KEY}&with_genres=10759&with_watch_providers=${watchProviders}&watch_region=${region}`,
+    ],
+  },
+  {
+    Name: "KIDS",
+    Url: [
+      `/discover/tv?api_key=${API_KEY}&with_genres=10762&with_watch_providers=${watchProviders}&watch_region=${region}`,
+    ],
+  },
+  {
+    Name: "NEWS",
+    Url: [
+      `/discover/tv?api_key=${API_KEY}&with_genres=10763&with_watch_providers=${watchProviders}&watch_region=${region}`,
+    ],
+  },
+  {
+    Name: "REALITY",
+    Url: [
+      `/discover/tv?api_key=${API_KEY}&with_genres=10764&with_watch_providers=${watchProviders}&watch_region=${region}`,
+    ],
+  },
+  {
+    Name: "SCI-FI AND FANTASY",
+    Url: [
+      `/discover/tv?api_key=${API_KEY}&with_genres=10765&with_watch_providers=${watchProviders}&watch_region=${region}`,
+    ],
+  },
+  {
+    Name: "SOAP",
+    Url: [
+      `/discover/tv?api_key=${API_KEY}&with_genres=10766&with_watch_providers=${watchProviders}&watch_region=${region}`,
+    ],
+  },
+  {
+    Name: "TALK",
+    Url: [
+      `/discover/tv?api_key=${API_KEY}&with_genres=10767&with_watch_providers=${watchProviders}&watch_region=${region}`,
+    ],
+  },
+  {
+    Name: "WAR AND POLITICS",
+    Url: [
+      `/discover/tv?api_key=${API_KEY}&with_genres=10768&with_watch_providers=${watchProviders}&watch_region=${region}`,
     ],
   },
 ];
 
 requestGenres = shuffleArray(requestGenres);
 export default requestGenres;
-//   export default requests;
-// //   MOVIE
-// // Action          28
-// // Adventure       12
-// // Animation       16
-// // Comedy          35
-// // Crime           80
-// // Documentary     99
-// // Drama           18
-// // Family          10751
-// // Fantasy         14
-// // History         36
-// // Horror          27
-// // Music           10402
-// // Mystery         9648
-// // Romance         10749
-// // Science Fiction 878
-// // TV Movie        10770
-// // Thriller        53
-// // War             10752
-// // Western         37
-// TV SHOW
-// Action & Adventure  10759
-// Animation           16
-// Comedy              35
-// Crime               80
-// Documentary         99
-// Drama               18
-// Family              10751
-// Kids                10762
-// Mystery             9648
-// News                10763
-// Reality             10764
-// Sci-Fi & Fantasy    10765
-// Soap                10766
-// Talk                10767
-// War & Politics      10768
-// Western             37
