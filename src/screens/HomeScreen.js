@@ -7,6 +7,7 @@ import Row from "../Row";
 import requestGenres from "../RequestGenres";
 import InfiniteScroll from "react-infinite-scroller";
 import showItems from "../showItems";
+import loadMore from "../loadMore";
 
 function HomeScreen() {
   const [, handleShow] = useState(false);
@@ -32,27 +33,13 @@ function HomeScreen() {
       window.addEventListener("scroll", showMore);
     };
   }, []);
-  const itemsPerPage = 6;
+  const itemsPerPage = 2;
   const [hasMore, setHasMore] = useState(true);
   const [records, setrecords] = useState(itemsPerPage);
-  const loadMore = () => {
-    if (records >= requestGenres.length) {
-      setHasMore(false);
-    } else {
-      var limit = [
-        document.body.scrollHeight,
-        document.body.offsetHeight,
-        document.documentElement.clientHeight,
-        document.documentElement.scrollHeight,
-        document.documentElement.offsetHeight,
-      ];
-      if (window.scrollY >= limit[0] - limit[2] - 300) {
-        setTimeout(() => {
-          setrecords(records + itemsPerPage);
-        }, 1000);
-      }
-    }
-  };
+  
+if(records < requestGenres.length){
+  loadMore(records, requestGenres, setHasMore, itemsPerPage,setrecords);
+}
 
   return (
     <div className="homeScreen">

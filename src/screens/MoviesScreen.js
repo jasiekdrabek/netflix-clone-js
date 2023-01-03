@@ -7,6 +7,7 @@ import requests from "../Requests";
 import Row from "../Row";
 import showItems from "../showItems";
 import "./MoviesScreen.css";
+import loadMore from "../loadMore";
 
 function MoviesScreen() {
   const [, handleShow] = useState(false);
@@ -32,27 +33,13 @@ function MoviesScreen() {
       window.addEventListener("scroll", showMore);
     };
   }, []);
-  const itemsPerPage = 6;
+  const itemsPerPage = 2;
   const [hasMore, setHasMore] = useState(true);
   const [records, setrecords] = useState(itemsPerPage);
-  const loadMore = () => {
-    if (records >= requestMovieGenres.length) {
-      setHasMore(false);
-    } else {
-      var limit = [
-        document.body.scrollHeight,
-        document.body.offsetHeight,
-        document.documentElement.clientHeight,
-        document.documentElement.scrollHeight,
-        document.documentElement.offsetHeight,
-      ];
-      if (window.scrollY >= limit[0] - limit[2] - 300) {
-        setTimeout(() => {
-          setrecords(records + itemsPerPage);
-        }, 1000);
-      }
-    }
-  };
+
+  if (records < requestMovieGenres.length) {
+    loadMore(records, requestMovieGenres, setHasMore, itemsPerPage, setrecords);
+  }
   return (
     <div className="moviesScreen">
       <Nav />

@@ -7,6 +7,7 @@ import requestTvSeriesGenres from "../RequestTvSeriesGenres";
 import Row from "../Row";
 import "./TvSeriesScreen.css";
 import showItems from "../showItems";
+import loadMore from "../loadMore";
 
 function TvSeriesScreen() {
   const [, handleShow] = useState(false);
@@ -32,28 +33,13 @@ function TvSeriesScreen() {
       window.addEventListener("scroll", showMore);
     };
   }, []);
-
-  const itemsPerPage = 6;
+  const itemsPerPage = 2;
   const [hasMore, setHasMore] = useState(true);
   const [records, setrecords] = useState(itemsPerPage);
-  const loadMore = () => {
-    if (records >= requestTvSeriesGenres.length) {
-      setHasMore(false);
-    } else {
-      var limit = [
-        document.body.scrollHeight,
-        document.body.offsetHeight,
-        document.documentElement.clientHeight,
-        document.documentElement.scrollHeight,
-        document.documentElement.offsetHeight,
-      ];
-      if (window.scrollY >= limit[0] - limit[2] - 300) {
-        setTimeout(() => {
-          setrecords(records + itemsPerPage);
-        }, 1000);
-      }
-    }
-  };
+  
+if(records < requestTvSeriesGenres.length){
+  loadMore(records, requestTvSeriesGenres, setHasMore, itemsPerPage,setrecords);
+}
   return (
     <div className="tvSeriesScreen">
       <Nav />
