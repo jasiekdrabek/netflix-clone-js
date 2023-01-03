@@ -29,7 +29,6 @@ function Banner() {
   function buttonDescriptionClick() {
     buttonDescription = document.getElementById("description-button");
     var description = document.getElementById("description");
-    console.log(buttonDescription?.textContent);
     if (buttonDescription?.textContent === "see more") {
       buttonDescription.textContent = "see less";
       // @ts-ignore
