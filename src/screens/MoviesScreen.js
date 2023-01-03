@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
-import Banner from "../Banner";
-import Nav from "../Nav";
-import requestMovieGenres from "../RequestMoviesGenres";
-import requests from "../Requests";
-import Row from "../Row";
-import showItems from "../showItems";
+import Banner from "../components/Banner";
+import Nav from "../components/Nav";
+import requestMovieGenres from "../requests/RequestMoviesGenres";
+import requests from "../requests/Requests";
+import Row from "../components/Row";
+import showItems from "../functions/showItems";
 import "./MoviesScreen.css";
-import loadMore from "../loadMore";
+import loadMore from "../functions/loadMore";
 
 function MoviesScreen() {
   const [, handleShow] = useState(false);

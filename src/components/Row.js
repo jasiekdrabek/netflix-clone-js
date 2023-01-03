@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from "./axios";
+import axios from "../requests/axios";
 import ClickMovie from "./ClickMovie";
 import "./Row.css";
-import shuffleArray from "./shuffleArray";
+import shuffleArray from "../functions/shuffleArray";
 
 function Row({ title, fetchUrl }) {
   const [movies, setMovies] = useState([]);

@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
-import HomeScreen from "./screens/HomeScreen";
+import HomeScreen from "../screens/HomeScreen";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import MoviesScreen from "./screens/MoviesScreen";
-import TvSeriesScreen from "./screens/TvSeriesScreen";
+import MoviesScreen from "../screens/MoviesScreen";
+import TvSeriesScreen from "../screens/TvSeriesScreen";
 
 function App() {
   return (

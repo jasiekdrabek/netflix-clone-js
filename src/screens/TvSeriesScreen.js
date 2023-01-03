@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
-import Banner from "../Banner";
-import Nav from "../Nav";
-import requests from "../Requests";
-import requestTvSeriesGenres from "../RequestTvSeriesGenres";
-import Row from "../Row";
+import Banner from "../components/Banner";
+import Nav from "../components/Nav";
+import requests from "../requests/Requests";
+import requestTvSeriesGenres from "../requests/RequestTvSeriesGenres";
+import Row from "../components/Row";
 import "./TvSeriesScreen.css";
-import showItems from "../showItems";
-import loadMore from "../loadMore";
+import showItems from "../functions/showItems";
+import loadMore from "../functions/loadMore";
 
 function TvSeriesScreen() {
   const [, handleShow] = useState(false);

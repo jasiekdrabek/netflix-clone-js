@@ -1,5 +1,5 @@
 import React from "react";
-import Row from "./Row";
+import Row from "../components/Row";
 
 const showItems = (shuffleRequestGenres, records) => {
   var items = [];

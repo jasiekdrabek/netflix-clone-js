@@ -1,4 +1,4 @@
-import shuffleArray from "./shuffleArray";
+import shuffleArray from "../functions/shuffleArray";
 // //normaly API_KEY should be hidden
 const API_KEY = "eb99eb0287033e0ff37b93fabaef3c62";
 const region = "US";

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Banner from "../Banner";
+import Banner from "../components/Banner";
 import "./HomeScreen.css";
-import Nav from "../Nav";
-import requests from "../Requests";
-import Row from "../Row";
-import requestGenres from "../RequestGenres";
+import Nav from "../components/Nav";
+import requests from "../requests/Requests";
+import Row from "../components/Row";
+import requestGenres from "../requests/RequestGenres";
 import InfiniteScroll from "react-infinite-scroller";
-import showItems from "../showItems";
-import loadMore from "../loadMore";
+import showItems from "../functions/showItems";
+import loadMore from "../functions/loadMore";
 
 function HomeScreen() {
   const [, handleShow] = useState(false);
