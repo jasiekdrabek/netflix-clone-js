@@ -18,7 +18,7 @@ function HomeScreen() {
       document.documentElement.offsetHeight,
     ];
 
-    if (window.scrollY >= limit[0] - limit[2]) {
+    if (window.scrollY >= (limit[0] - limit[2] -300)) {
       handleShow(true);
     } else {
       handleShow(false);
@@ -43,7 +43,7 @@ function HomeScreen() {
     }
     return items;
   };
-  const itemsPerPage = 2;
+  const itemsPerPage = 6;
   const [hasMore, setHasMore] = useState(true);
   const [records, setrecords] = useState(itemsPerPage);
   const loadMore = () => {
@@ -57,7 +57,7 @@ function HomeScreen() {
         document.documentElement.scrollHeight,
         document.documentElement.offsetHeight,
       ];
-      if (window.scrollY >= limit[0] - limit[2]) {
+      if (window.scrollY >= (limit[0] - limit[2] -300)) {
         setTimeout(() => {
           setrecords(records + itemsPerPage);
         }, 1000);
