@@ -33,7 +33,7 @@ function HomeScreen() {
   }, []);
   const showItems = (shuffleRequestGenres) => {
     var items = [];
-    for (var i = 0; i < records; i++) {
+    for (var i = 0; i < Math.min(records,shuffleRequestGenres.length); i++) {
       items.push(
         <Row
           title={shuffleRequestGenres[i].Name}
@@ -47,7 +47,7 @@ function HomeScreen() {
   const [hasMore, setHasMore] = useState(true);
   const [records, setrecords] = useState(itemsPerPage);
   const loadMore = () => {
-    if (records === requestGenres.length - 1) {
+    if (records >= requestGenres.length ) {
       setHasMore(false);
     } else {
       var limit = [
