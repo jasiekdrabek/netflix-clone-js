@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Banner from "./Banner";
+import Banner from "../Banner";
 import "./HomeScreen.css";
-import Nav from "./Nav";
-import requests from "./Requests";
-import Row from "./Row";
-import requestGenres from "./RequestGenres";
+import Nav from "../Nav";
+import requests from "../Requests";
+import Row from "../Row";
+import requestGenres from "../RequestGenres";
 import InfiniteScroll from "react-infinite-scroller";
+import showItems from "../showItems";
 
 function HomeScreen() {
   const [, handleShow] = useState(false);
@@ -18,7 +19,7 @@ function HomeScreen() {
       document.documentElement.offsetHeight,
     ];
 
-    if (window.scrollY >= (limit[0] - limit[2] -300)) {
+    if (window.scrollY >= limit[0] - limit[2] - 300) {
       handleShow(true);
     } else {
       handleShow(false);
@@ -31,23 +32,11 @@ function HomeScreen() {
       window.addEventListener("scroll", showMore);
     };
   }, []);
-  const showItems = (shuffleRequestGenres) => {
-    var items = [];
-    for (var i = 0; i < Math.min(records,shuffleRequestGenres.length); i++) {
-      items.push(
-        <Row
-          title={shuffleRequestGenres[i].Name}
-          fetchUrl={shuffleRequestGenres[i].Url}
-        />
-      );
-    }
-    return items;
-  };
   const itemsPerPage = 6;
   const [hasMore, setHasMore] = useState(true);
   const [records, setrecords] = useState(itemsPerPage);
   const loadMore = () => {
-    if (records >= requestGenres.length ) {
+    if (records >= requestGenres.length) {
       setHasMore(false);
     } else {
       var limit = [
@@ -57,7 +46,7 @@ function HomeScreen() {
         document.documentElement.scrollHeight,
         document.documentElement.offsetHeight,
       ];
-      if (window.scrollY >= (limit[0] - limit[2] -300)) {
+      if (window.scrollY >= limit[0] - limit[2] - 300) {
         setTimeout(() => {
           setrecords(records + itemsPerPage);
         }, 1000);
@@ -81,7 +70,7 @@ function HomeScreen() {
         hasMore={hasMore}
         useWindow={false}
       >
-        {showItems(requestGenres)}
+        {showItems(requestGenres, records)}
       </InfiniteScroll>
     </div>
   );
