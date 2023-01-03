@@ -26,7 +26,7 @@ function Row({ title, fetchUrl }) {
     fetchData();
   }, [fetchUrl]);
   const handleClick = (movie) => {
-    if (click) {
+    if (click === movie) {
       setClick("");
     } else {
       setClick(movie);
@@ -42,6 +42,7 @@ function Row({ title, fetchUrl }) {
             // @ts-ignore
 
             movie.backdrop_path &&
+            // @ts-ignore
             movie.poster_path && (
               <img
                 className={`row__poster `}
@@ -57,7 +58,7 @@ function Row({ title, fetchUrl }) {
             )
         )}
       </div>
-      {click && <ClickMovie movie={click} />}
+      {click && <ClickMovie movie1={click} />}
     </div>
   );
 }

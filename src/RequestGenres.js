@@ -2,22 +2,49 @@ import shuffleArray from "./shuffleArray";
 // //normaly API_KEY should be hidden
 const API_KEY = "eb99eb0287033e0ff37b93fabaef3c62";
 let requestGenres = [
-  { Name: "ACTION", Url: [`/discover/movie?api_key=${API_KEY}&with_genres=28`] },
+  {
+    Name: "ACTION",
+    Url: [`/discover/movie?api_key=${API_KEY}&with_genres=28`],
+  },
   {
     Name: "ANIMATION",
-    Url: [`/discover/movie?api_key=${API_KEY}&with_genres=12`],
+    Url: [
+      `/discover/movie?api_key=${API_KEY}&with_genres=16`,
+      `/discover/tv?api_key=${API_KEY}&with_genres=16`,
+    ],
   },
   {
     Name: "ADVENTURE",
-    Url: [`/discover/movie?api_key=${API_KEY}&with_genres=16`],
+    Url: [`/discover/movie?api_key=${API_KEY}&with_genres=12`],
   },
-  { Name: "COMEDY", Url: [`/discover/movie?api_key=${API_KEY}&with_genres=35`] },
-  { Name: "CRIME", Url: [`/discover/movie?api_key=${API_KEY}&with_genres=80`] },
+  {
+    Name: "COMEDY",
+    Url: [
+      `/discover/movie?api_key=${API_KEY}&with_genres=35`,
+      `/discover/tv?api_key=${API_KEY}&with_genres=35`,
+    ],
+  },
+  {
+    Name: "CRIME",
+    Url: [
+      `/discover/movie?api_key=${API_KEY}&with_genres=80`,
+      `/discover/tv?api_key=${API_KEY}&with_genres=80`,
+    ],
+  },
   {
     Name: "DOCUMENTARY",
-    Url: [`/discover/movie?api_key=${API_KEY}&with_genres=99`],
+    Url: [
+      `/discover/movie?api_key=${API_KEY}&with_genres=99`,
+      `/discover/tv?api_key=${API_KEY}&with_genres=99`,
+    ],
   },
-  { Name: "DRAMA", Url: [`/discover/movie?api_key=${API_KEY}&with_genres=18`] },
+  {
+    Name: "DRAMA",
+    Url: [
+      `/discover/movie?api_key=${API_KEY}&with_genres=18`,
+      `/discover/tv?api_key=${API_KEY}&with_genres=18`,
+    ],
+  },
 ];
 
 requestGenres = shuffleArray(requestGenres);

@@ -6,21 +6,19 @@ import requests from "./Requests";
 function Banner() {
   const [movie, setMovie] = useState([]);
 
-var result;
+  var result;
   useEffect(() => {
-    async function fetchData() {     
+    async function fetchData() {
       const request = await axios.get(requests.fetchNetflixOriginals[0]);
-result = request.data.results[
-  Math.floor(Math.random() *( request.data.results.length - 1))
-]
-      setMovie(
-        result
-      );
-      if (result.backdrop_path == null){
-        setMovie(request.data.results[0])
+      result =
+        request.data.results[
+          Math.floor(Math.random() * (request.data.results.length - 1))
+        ];
+      setMovie(result);
+      if (result.backdrop_path == null) {
+        setMovie(request.data.results[0]);
       }
       return request;
-      
     }
     fetchData();
   }, []);
@@ -59,10 +57,16 @@ result = request.data.results[
       }}
     >
       <div className="banner__content">
-        
-        <h1 className="banner__title">{movie?.
-// @ts-ignore
-        name || movie?.title || movie?.original_name }</h1>
+        <h1 className="banner__title">
+          {
+            // @ts-ignore
+            movie?.name ||
+              // @ts-ignore
+              movie?.title ||
+              // @ts-ignore
+              movie?.original_name
+          }
+        </h1>
         <div className="banner__buttons">
           <button className="banner__button">Play</button>
           <button className="banner__button">My list</button>
