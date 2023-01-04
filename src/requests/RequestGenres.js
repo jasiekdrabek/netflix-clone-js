@@ -1,8 +1,8 @@
 import shuffleArray from "../functions/shuffleArray";
-// //normaly API_KEY should be hidden
-const API_KEY = "eb99eb0287033e0ff37b93fabaef3c62";
+
+const API_KEY = process.env.REACT_APP_API_KEY_TMDB;
 const region = "US";
-const watchProviders ="8";
+const watchProviders = "8";
 let requestGenres = [
   {
     Name: "ACTION",
@@ -14,7 +14,7 @@ let requestGenres = [
     Name: "ANIMATION",
     Url: [
       `/discover/movie?api_key=${API_KEY}&with_genres=16&with_watch_providers=${watchProviders}&watch_region=${region}`,
-      `/discover/tv?api_key=${API_KEY}&with_genres=16&with_watch_providers=${watchProviders}&watch_region=${region}S`,
+      `/discover/tv?api_key=${API_KEY}&with_genres=16&with_watch_providers=${watchProviders}&watch_region=${region}`,
     ],
   },
   {
