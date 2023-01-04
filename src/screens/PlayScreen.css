@@ -1,0 +1,11 @@
+.playScreen {
+  height: 90vh;
+}
+.yt__video {
+  height: 90vh;
+}
+.magic__link {
+  display: block;
+  font-size: medium;
+  font-weight: bold;
+}
