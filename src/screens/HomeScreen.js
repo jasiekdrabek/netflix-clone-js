@@ -36,10 +36,10 @@ function HomeScreen() {
   const itemsPerPage = 2;
   const [hasMore, setHasMore] = useState(true);
   const [records, setrecords] = useState(itemsPerPage);
-  
-if(records < requestGenres.length){
-  loadMore(records, requestGenres, setHasMore, itemsPerPage,setrecords);
-}
+
+  if (records < requestGenres.length) {
+    loadMore(records, requestGenres, setHasMore, itemsPerPage, setrecords);
+  }
 
   return (
     <div className="homeScreen">

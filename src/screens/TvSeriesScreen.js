@@ -36,10 +36,16 @@ function TvSeriesScreen() {
   const itemsPerPage = 2;
   const [hasMore, setHasMore] = useState(true);
   const [records, setrecords] = useState(itemsPerPage);
-  
-if(records < requestTvSeriesGenres.length){
-  loadMore(records, requestTvSeriesGenres, setHasMore, itemsPerPage,setrecords);
-}
+
+  if (records < requestTvSeriesGenres.length) {
+    loadMore(
+      records,
+      requestTvSeriesGenres,
+      setHasMore,
+      itemsPerPage,
+      setrecords
+    );
+  }
   return (
     <div className="tvSeriesScreen">
       <Nav />
