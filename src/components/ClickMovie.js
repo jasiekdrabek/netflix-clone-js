@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Banner.css";
 
 function ClickMovie({ movie1 }) {
+  const navigate = useNavigate();
   const [movie, setMovie] = useState([]);
 
   useEffect(() => {
@@ -12,7 +14,9 @@ function ClickMovie({ movie1 }) {
     return string?.length > n ? string.substr(0, n - 1) + "..." : string;
   }
 
-  function buttonClick() {}
+  function buttonClick() {
+    navigate(`/play/`, { state: movie });
+  }
 
   return (
     <header

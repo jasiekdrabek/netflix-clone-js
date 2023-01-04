@@ -14,10 +14,26 @@ function Row({ title, fetchUrl }) {
         var request;
         for (let i = 0; i < fetchUrl.length; i++) {
           request = await axios.get(fetchUrl[i]);
-          results = results.concat(request.data.results);
+          var result = request.data.results;
+          for (let j = 0; j < result.length; j++) {
+            if (fetchUrl[i].startsWith("/discover/movie")) {
+              result[j].type = "Movie";
+            } else {
+              result[j].type = "Tv series";
+            }
+            results.push(result[j]);
+          }
         }
       } else {
         request = await axios.get(fetchUrl);
+        result = request.data.results;
+        for (let j = 0; j < result.length; j++) {
+          if (fetchUrl.startsWith("/discover/movie")) {
+            result[j].type = "Movie";
+          } else {
+            result[j].type = "Tv series";
+          }
+        }
         results = request.data.results;
       }
       results = shuffleArray(results);

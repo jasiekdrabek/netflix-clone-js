@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./Banner.css";
 import axios from "../requests/axios";
 import requests from "../requests/Requests";
+import { useNavigate } from "react-router-dom";
 
 function Banner({ number = 0 }) {
+  const navigate = useNavigate();
   const [movie, setMovie] = useState([]);
 
   useEffect(() => {
@@ -14,6 +16,11 @@ function Banner({ number = 0 }) {
         request.data.results[
           Math.floor(Math.random() * (request.data.results.length - 1))
         ];
+      if (number === 0) {
+        result.type = "Tv series";
+      } else {
+        result.type = "Movie";
+      }
       setMovie(result);
       if (result.backdrop_path == null) {
         setMovie(request.data.results[0]);
@@ -25,6 +32,9 @@ function Banner({ number = 0 }) {
   var buttonDescription = document.getElementById("description-button");
   function truncate(string, n) {
     return string?.length > n ? string.substr(0, n - 1) + "..." : string;
+  }
+  function buttonPlay() {
+    navigate(`/play/`, { state: movie });
   }
   function buttonDescriptionClick() {
     buttonDescription = document.getElementById("description-button");
@@ -67,7 +77,10 @@ function Banner({ number = 0 }) {
           }
         </h1>
         <div className="banner__buttons">
-          <button className="banner__button">Play</button>
+          <button className="banner__button" onClick={buttonPlay}>
+            Play
+          </button>
+
           <button className="banner__button">My list</button>
         </div>
         <h1 className="description__content">
