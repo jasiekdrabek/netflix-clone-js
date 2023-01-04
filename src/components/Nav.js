@@ -49,10 +49,10 @@ function Nav() {
           src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
           alt=""
         />
-        <h2 className="nav__element nav__hidden" onClick={movieClick}>
+        <h2 className="nav__element" onClick={movieClick}>
           MOVIES
         </h2>
-        <h2 className="nav__element nav__hidden" onClick={tvClick}>
+        <h2 className="nav__element" onClick={tvClick}>
           TV SERIES
         </h2>
         <img
