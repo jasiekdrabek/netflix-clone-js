@@ -32,7 +32,7 @@ function HomeScreen() {
     return () => {
       window.addEventListener("scroll", showMore);
     };
-  }, []);
+  }, [showMore]);
   const itemsPerPage = 2;
   const [hasMore, setHasMore] = useState(true);
   const [records, setrecords] = useState(itemsPerPage);
