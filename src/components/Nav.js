@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../firebase";
 import "./Nav.css";
 
 function Nav() {
@@ -25,6 +26,10 @@ function Nav() {
     };
   }, []);
 
+  const logout = (e) => {
+    e.preventDefault();
+    auth.signOut();
+  };
   function logoClick() {
     goToTop();
     navigate("/");
@@ -55,11 +60,21 @@ function Nav() {
         <h2 className="nav__element" onClick={tvClick}>
           TV SERIES
         </h2>
-        <img
-          className="nav__avatar nav__element"
-          src="https://i.pinimg.com/564x/19/b9/dd/19b9dde17c93c1dfe153e5c8ed7be575.jpg"
-          alt=""
-        />
+        <div className="nav__dropdown">
+          <img
+            className="nav__avatar nav__element"
+            src="https://i.pinimg.com/564x/19/b9/dd/19b9dde17c93c1dfe153e5c8ed7be575.jpg"
+            alt=""
+          />
+          <div className="nav__dropdownContent">
+            <button className="nav__dropdownbutton" onClick={logout}>
+              Sign Out
+            </button>
+            <button className="nav__dropdownbutton">
+              Testbdgxbsfgndhjdthdndh
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
