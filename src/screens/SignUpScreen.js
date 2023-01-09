@@ -1,15 +1,15 @@
 import React, { useRef } from "react";
 import "./SignUpScreen.css";
-import { auth } from "../firebase";
+import db, { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
 
 function SignUpScreen() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const navigate = useNavigate();
+
   const register = (e) => {
     e.preventDefault();
-
     auth
       .createUserWithEmailAndPassword(
         // @ts-ignore
@@ -18,10 +18,21 @@ function SignUpScreen() {
         passwordRef.current.value
       )
       .then(() => {
-        navigate("/home");
+        console.log(auth.currentUser);
+        db.collection("User Movies list")
+          .doc(auth.currentUser?.uid)
+          .set({ movieList: [], tvList: [] });
+        db.collection("User region")
+          .doc(auth.currentUser?.uid)
+          .set({ region: "US" });
+        db.collection("User watch provider")
+          .doc(auth.currentUser?.uid)
+          .set({ watchProviderId: "8", watchProviderName: "Netflix" });
+        navigate("/");
       })
       .catch((error) => alert(error));
   };
+
   const signIn = (e) => {
     e.preventDefault();
     auth
@@ -34,6 +45,7 @@ function SignUpScreen() {
       .then(() => {})
       .catch((error) => alert(error));
   };
+
   return (
     <div className="singUpScreen">
       <form>
