@@ -107,11 +107,17 @@ function Row({
               }
             }
           }
-        }
-        results = shuffleArray(results);
+        }     
+        results = shuffleArray(results);   
+        // @ts-ignore
         setMovies(results);
         return;
       }
+    }
+    fetchData()
+  },[watchProvider,region,sortBy,genreId,displayGenres,voteCount,media_type]);
+  useEffect(() => {
+    async function fetchData() {      
       if (displayMyList) {
         if (!myList) {
           return;
@@ -148,10 +154,21 @@ function Row({
             }
           }
         }
+        moviesResult = shuffleArray(moviesResult);
         // @ts-ignore
         setMovies(moviesResult);
         return;
       }
+    }
+    fetchData();
+  },[myList,media_type,displayMyList]);
+  useEffect(() => {
+    async function fetchData() {
+      var results = [];
+      var ids = [];
+      var request;
+      var options;
+      var result;
       if (displaySearch) {
         if (query === "" && searchFor === "") {
           return;
@@ -191,6 +208,7 @@ function Row({
               }
             }
           }
+          results = shuffleArray(results);
           // @ts-ignore
           setMovies(results);
           return;
@@ -199,21 +217,8 @@ function Row({
       }
     }
     fetchData();
-  }, [
-    media_type,
-    title,
-    genreId,
-    sortBy,
-    voteCount,
-    watchProvider,
-    region,
-    myList,
-    displayGenres,
-    displayMyList,
-    searchFor,
-    displaySearch,
-    query,
-  ]);
+  }, [query,searchFor,displaySearch,media_type]);
+  
   
   const handleClick = (movie) => {
     if (movie.media_type != null) {
