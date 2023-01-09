@@ -13,6 +13,7 @@
   display: inline-flex;
   float: left;
   justify-content: space-between;
+  object-fit: contain;
 }
 
 .nav__logo {
@@ -40,7 +41,7 @@
 
 .nav__dropdownbutton {
   width: 80px;
-  min-height: 30px;
+  min-height: 24px;
   font-size: 0.7rem;
   border-radius: 5px;
   background-color: #e50914;
@@ -50,8 +51,8 @@
   cursor: pointer;
   white-space: normal;
   word-wrap: break-word;
-  margin-top: -20px;
-  margin-bottom: -20px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .nav__dropdownbutton:hover {
@@ -75,6 +76,7 @@
   padding-right: 20px;
   cursor: pointer;
   display: none;
+  object-fit: contain;
 }
 
 .nav:hover .nav__element {
@@ -83,4 +85,12 @@
 
 .nav__black .nav__element {
   display: inline;
+}
+
+.nav__searchbar {
+  max-width: 80px;
+}
+
+.nav__h2 {
+  margin-top: -5px;
 }
