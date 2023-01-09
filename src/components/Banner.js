@@ -1,25 +1,56 @@
 import React, { useEffect, useState } from "react";
 import "./Banner.css";
-import axios from "../requests/axios";
-import requests from "../requests/Requests";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getMovieList,
+  selectMovieList,
+  selectRegion,
+  selectWatchProvider,
+} from "../functions/userSlice";
+import db, { auth } from "../firebase";
 
 function Banner({ number = 0 }) {
+  const dispatch = useDispatch();
+  const myList = useSelector(selectMovieList);
   const navigate = useNavigate();
+  const [myListButton, setMyList] = useState(true);
   const [movie, setMovie] = useState([]);
+  const watchProvider = useSelector(selectWatchProvider);
+  const region = useSelector(selectRegion);
 
   useEffect(() => {
+    if (watchProvider === null || number === null || region === null) {
+      return;
+    }
     var result;
     async function fetchData() {
-      const request = await axios.get(requests.fetchNetflixOriginals[number]);
+      var url;
+      if (number === 0) {
+        url = "https://api.themoviedb.org/3/discover/tv";
+      } else if (number === 1) {
+        url = "https://api.themoviedb.org/3/discover/movie";
+      }
+      const options = {
+        method: "GET",
+        url: url,
+        params: {
+          api_key: process.env.REACT_APP_API_KEY_TMDB,
+          language: "en-US",
+          with_watch_providers: watchProvider.Id,
+          watch_region: region,
+        },
+      };
+      const request = await axios.request(options);
       result =
         request.data.results[
           Math.floor(Math.random() * (request.data.results.length - 1))
         ];
       if (number === 0) {
-        result.type = "Tv series";
+        result.media_type = "tv";
       } else {
-        result.type = "Movie";
+        result.media_type = "movie";
       }
       setMovie(result);
       if (result.backdrop_path == null) {
@@ -28,14 +59,69 @@ function Banner({ number = 0 }) {
       return request;
     }
     fetchData();
-  }, [number]);
+  }, [watchProvider, number, region]);
+
+  useEffect(() => {    
+    if (
+      // @ts-ignore
+      myList?.movieList?.includes(movie.id) ||
+      // @ts-ignore
+      myList?.tvList?.includes(movie.id)
+    ) {
+      setMyList(false);
+    } else {
+      setMyList(true);
+    }
+  }, [myList, movie]);
+
   var buttonDescription = document.getElementById("description-button");
   function truncate(string, n) {
     return string?.length > n ? string.substr(0, n - 1) + "..." : string;
   }
+
   function buttonPlay() {
     navigate(`/play/`, { state: movie });
   }
+
+  function buttonMyList() {
+    setMyList(!myListButton);
+    var newList = [];
+    // @ts-ignore
+    if (movie.media_type === "movie") {
+      for (let i = 0; i < myList?.movieList?.length; i++) {
+        newList.push(myList.movieList[i]);
+      }
+    } else {
+      for (let i = 0; i < myList?.tvList?.length; i++) {
+        newList.push(myList.tvList[i]);
+      }
+    }
+    if (myListButton) {
+      // @ts-ignore
+      newList.push(movie.id);
+    } else {
+      for (var i = 0; i < newList.length; i++) {
+        // @ts-ignore
+        if (newList[i] === movie.id) {
+          newList.splice(i, 1);
+          break;
+        }
+      }
+    }
+    // @ts-ignore
+    if (movie.media_type === "movie") {
+      dispatch(getMovieList({ movieList: newList, tvList: myList.tvList }));
+      db.collection("User Movies list")
+        .doc(auth.currentUser?.uid)
+        .update({ movieList: newList });
+    } else {
+      dispatch(getMovieList({ tvList: newList, movieList: myList.movieList }));
+      db.collection("User Movies list")
+        .doc(auth.currentUser?.uid)
+        .update({ tvList: newList });
+    }
+  }
+
   function buttonDescriptionClick() {
     buttonDescription = document.getElementById("description-button");
     var description = document.getElementById("description");
@@ -81,7 +167,9 @@ function Banner({ number = 0 }) {
             Play
           </button>
 
-          <button className="banner__button">My list</button>
+          <button className="banner__button" onClick={buttonMyList}>
+            {myListButton ? "Add to My list" : "Remove from my list"}
+          </button>
         </div>
         <h1 className="description__content">
           <div

@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import db, { auth } from "../firebase";
+import { getMovieList, selectMovieList } from "../functions/userSlice";
 import "./Banner.css";
 
 function ClickMovie({ movie1 }) {
+  const dispatch = useDispatch();
+  var myList = useSelector(selectMovieList);
+  const [myListButton, setMyList] = useState(true);
   const navigate = useNavigate();
   const [movie, setMovie] = useState([]);
 
@@ -10,12 +16,63 @@ function ClickMovie({ movie1 }) {
     setMovie(movie1);
   }, [movie1]);
 
+  useEffect(() => {
+    if (
+      myList.movieList?.includes(movie1.id) ||
+      myList.tvList?.includes(movie1.id)
+    ) {
+      setMyList(false);
+    } else {
+      setMyList(true);
+    }
+  }, [myList, movie1]);
+
   function truncate(string, n) {
     return string?.length > n ? string.substr(0, n - 1) + "..." : string;
   }
 
   function buttonClick() {
     navigate(`/play/`, { state: movie });
+  }
+
+  function buttonMyList() {
+    setMyList(!myListButton);
+    var newList = [];
+    // @ts-ignore
+    if (movie.media_type === "movie") {
+      for (let i = 0; i < myList?.movieList?.length; i++) {
+        newList.push(myList.movieList[i]);
+      }
+    } else {
+      for (let i = 0; i < myList?.tvList?.length; i++) {
+        newList.push(myList.tvList[i]);
+      }
+    }
+
+    if (myListButton) {
+      // @ts-ignore
+      newList.push(movie.id);
+    } else {
+      for (var i = 0; i < newList.length; i++) {
+        // @ts-ignore
+        if (newList[i] === movie.id) {
+          newList.splice(i, 1);
+          break;
+        }
+      }
+    }
+    // @ts-ignore
+    if (movie.media_type === "movie") {
+      dispatch(getMovieList({ movieList: newList, tvList: myList.tvList }));
+      db.collection("User Movies list")
+        .doc(auth.currentUser?.uid)
+        .update({ movieList: newList });
+    } else {
+      dispatch(getMovieList({ tvList: newList, movieList: myList.movieList }));
+      db.collection("User Movies list")
+        .doc(auth.currentUser?.uid)
+        .update({ tvList: newList });
+    }
   }
 
   return (
@@ -43,7 +100,9 @@ function ClickMovie({ movie1 }) {
           <button className="banner__button" onClick={buttonClick}>
             Play
           </button>
-          <button className="banner__button">My list</button>
+          <button className="banner__button" onClick={buttonMyList}>
+            {myListButton ? "Add to My list" : "Remove from my list"}
+          </button>
         </div>
         <h1 className="description__content">
           <div id="description1" className="banner__description">
