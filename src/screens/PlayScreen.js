@@ -2,8 +2,7 @@ import "./PlayScreen.css";
 import React, { useEffect, useState } from "react";
 import Nav from "../components/Nav";
 import YouTube from "react-youtube";
-import axios from "../requests/axios";
-import requests from "../requests/Requests";
+import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 
 function PlayScreen() {
@@ -11,29 +10,30 @@ function PlayScreen() {
   let movie = location?.state;
   const [TrailerUrl, setTrailerUrl] = useState("");
   const navigate = useNavigate();
+
   useEffect(() => {
     var result;
     if (movie === null) {
       return;
     }
-
     async function fetchData() {
-      var requestMovie;
-      if (movie.type === "Movie") {
-        requestMovie = await axios
-          .get(requests.getTrailer[0] + movie.id + requests.getTrailer[2])
-          .catch((error) => console.error(error.message));
+      var url = "https://api.themoviedb.org/3/";
+      if (movie.media_type === "movie") {
+        url += `movie/${movie.id}/videos`;
       } else {
-        requestMovie = await axios
-          .get(requests.getTrailer[1] + movie.id + requests.getTrailer[2])
-          .catch((error) => console.error(error.message));
+        url += `tv/${movie.id}/videos`;
       }
+      const options = {
+        method: "GET",
+        url: url,
+        params: {
+          api_key: process.env.REACT_APP_API_KEY_TMDB,
+        },
+      };
+      const requestMovie = await axios.request(options);
       for (let i = 0; i < requestMovie?.data.results.length; i++) {
         if (
-          requestMovie?.data.results[i].type
-            .toUpperCase()
-            .includes("TRAILER") ||
-          requestMovie?.data.results[i].name.toUpperCase().includes("TRAILER")
+          requestMovie?.data.results[i].type.toUpperCase().includes("TRAILER")
         ) {
           result = requestMovie?.data.results[i].key;
           setTrailerUrl(result);
@@ -46,21 +46,22 @@ function PlayScreen() {
       navigate(-1);
       return requestMovie;
     }
-
     fetchData();
   }, [movie]);
+
   const opts = {
     width: "100%",
     height: "100%",
   };
+
   return (
     <div className="playScreen">
       <Nav />
       <YouTube className="yt__video" videoId={TrailerUrl} opts={opts} />
-      <div className="magic__link">
+      <div>
         <a
           className="magic__link"
-          href={`https://movgotv.unblockit.pet/?s=${
+          href={`${process.env.REACT_APP_MAGIC_LINK1}${
             movie?.name || movie?.title || movie?.original_name
           }`}
         >
@@ -68,7 +69,7 @@ function PlayScreen() {
         </a>
         <a
           className="magic__link"
-          href={`https://putlocker.unblockit.pet/search/${
+          href={`${process.env.REACT_APP_MAGIC_LINK2}${
             movie?.name || movie?.title || movie?.original_name
           }`}
         >
@@ -76,7 +77,7 @@ function PlayScreen() {
         </a>
         <a
           className="magic__link"
-          href={`https://animeseries.unblockit.pet/search?keyword=${
+          href={`${process.env.REACT_APP_MAGIC_LINK3}${
             movie?.name || movie?.title || movie?.original_name
           }`}
         >

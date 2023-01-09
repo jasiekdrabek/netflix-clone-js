@@ -6,6 +6,20 @@
 }
 .magic__link {
   display: block;
-  font-size: medium;
-  font-weight: bold;
+  text-align: center;
+  max-width: 20%;
+  margin-left: auto;
+  margin-right: auto;
+  max-height: fit-content;
+  font-size: 1rem;
+  border-radius: 5px;
+  background-color: #e50914;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.magic__link:hover {
+  background-color: #d64c53;
 }
