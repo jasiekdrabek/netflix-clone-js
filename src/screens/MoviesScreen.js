@@ -26,6 +26,7 @@ function MoviesScreen() {
       handleShow(false);
     }
   };
+
   useEffect(() => {
     window.addEventListener("scroll", showMore);
 
@@ -33,6 +34,7 @@ function MoviesScreen() {
       window.addEventListener("scroll", showMore);
     };
   }, []);
+
   const itemsPerPage = 2;
   const [hasMore, setHasMore] = useState(true);
   const [records, setrecords] = useState(itemsPerPage);
@@ -40,23 +42,34 @@ function MoviesScreen() {
   if (records < requestMovieGenres.length) {
     loadMore(records, requestMovieGenres, setHasMore, itemsPerPage, setrecords);
   }
+
   return (
     <div className="moviesScreen">
       <Nav />
       <Banner number={1} />
       <Row
-        title="NETFLIX ORIGINALS"
-        fetchUrl={requests.fetchNetflixOriginals[1]}
+        title="TRENDING"
+        displayGenres={true}
+        // @ts-ignore
+        sortBy={requests.fetchTrending.sort_by}
+        media_type="movie"
       />
-      <Row title="TRENDING" fetchUrl={requests.fetchTrending[1]} />
-      <Row title="TOP RATED" fetchUrl={requests.fetchTopRated[1]} />
+      <Row
+        title="TOP RATED"
+        displayGenres={true}
+        // @ts-ignore
+        sortBy={requests.fetchTopRated.sort_by}
+        // @ts-ignore
+        voteCount={requests.fetchTopRated["vote_count.gte"]}
+        media_type="movie"
+      />
       <InfiniteScroll
         pageStart={0}
         loadMore={loadMore}
         hasMore={hasMore}
         useWindow={false}
       >
-        {showItems(requestMovieGenres, records)}
+        {showItems(requestMovieGenres, records, "movie")}
       </InfiniteScroll>
     </div>
   );

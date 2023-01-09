@@ -26,13 +26,14 @@ function HomeScreen() {
       handleShow(false);
     }
   };
+
   useEffect(() => {
     window.addEventListener("scroll", showMore);
-
     return () => {
       window.addEventListener("scroll", showMore);
     };
-  }, [showMore]);
+  }, []);
+
   const itemsPerPage = 2;
   const [hasMore, setHasMore] = useState(true);
   const [records, setrecords] = useState(itemsPerPage);
@@ -46,11 +47,19 @@ function HomeScreen() {
       <Nav />
       <Banner />
       <Row
-        title="NETFLIX ORIGINALS"
-        fetchUrl={requests.fetchNetflixOriginals}
+        title="TRENDING"
+        displayGenres={true}
+        // @ts-ignore
+        sortBy={requests.fetchTrending.sort_by}
       />
-      <Row title="TRENDING" fetchUrl={requests.fetchTrending} />
-      <Row title="TOP RATED" fetchUrl={requests.fetchTopRated} />
+      <Row
+        title="TOP RATED"
+        displayGenres={true}
+        // @ts-ignore
+        sortBy={requests.fetchTopRated.sort_by}
+        // @ts-ignore
+        voteCount={requests.fetchTopRated["vote_count.gte"]}
+      />
       <InfiniteScroll
         pageStart={0}
         loadMore={loadMore}

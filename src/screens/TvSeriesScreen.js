@@ -26,13 +26,14 @@ function TvSeriesScreen() {
       handleShow(false);
     }
   };
+
   useEffect(() => {
     window.addEventListener("scroll", showMore);
-
     return () => {
       window.addEventListener("scroll", showMore);
     };
   }, []);
+
   const itemsPerPage = 2;
   const [hasMore, setHasMore] = useState(true);
   const [records, setrecords] = useState(itemsPerPage);
@@ -46,23 +47,28 @@ function TvSeriesScreen() {
       setrecords
     );
   }
+
   return (
     <div className="tvSeriesScreen">
       <Nav />
       <Banner number={0} />
+      <Row title="TRENDING" displayGenres={true} media_type="tv" />
       <Row
-        title="NETFLIX ORIGINALS"
-        fetchUrl={requests.fetchNetflixOriginals[0]}
+        title="TOP RATED"
+        displayGenres={true}
+        // @ts-ignore
+        sortBy={requests.fetchTopRated.sort_by}
+        // @ts-ignore
+        voteCount={requests.fetchTopRated["vote_count.gte"]}
+        media_type="tv"
       />
-      <Row title="TRENDING" fetchUrl={requests.fetchTrending[0]} />
-      <Row title="TOP RATED" fetchUrl={requests.fetchTopRated[0]} />
       <InfiniteScroll
         pageStart={0}
         loadMore={loadMore}
         hasMore={hasMore}
         useWindow={false}
       >
-        {showItems(requestTvSeriesGenres, records)}
+        {showItems(requestTvSeriesGenres, records, "tv")}
       </InfiniteScroll>
     </div>
   );
