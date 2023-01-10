@@ -47,8 +47,8 @@ function Row({
           url: "https://api.themoviedb.org/3/discover/movie",
           params: {
             api_key: process.env.REACT_APP_API_KEY_TMDB,
-            with_watch_providers: watchProvider.watchProviderId,
-            watch_region: region.region,
+            with_watch_providers: watchProvider?.watchProviderId,
+            watch_region: region?.region,
           },
         };
         if (genreId != null) {
