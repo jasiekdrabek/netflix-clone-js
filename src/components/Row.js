@@ -21,6 +21,8 @@ function Row({
   displayGenres = false,
   displayMyList = false,
   displaySearch = false,
+  displayMoviesWith = false,
+  person = "",
   searchFor = "",
 }) {
   const scrollRef = useHorizontalScroll();
@@ -68,7 +70,7 @@ function Row({
               ids.push(result[j].id);
             }
           }
-          const morePages = Math.min(4, request.data.total_pages);
+          const morePages = Math.min(3, request.data.total_pages);
           for (let i = 2; i <= morePages; i++) {
             options.params.page = i;
             request = await axios.request(options);
@@ -94,7 +96,7 @@ function Row({
               ids.push(result[j].id);
             }
           }
-          const morePages = Math.min(4, request.data.total_pages);
+          const morePages = Math.min(3, request.data.total_pages);
           for (let i = 2; i <= morePages; i++) {
             options.params.page = i;
             request = await axios.request(options);
@@ -107,17 +109,26 @@ function Row({
               }
             }
           }
-        }     
-        results = shuffleArray(results);   
+        }
+        results = shuffleArray(results);
         // @ts-ignore
         setMovies(results);
         return;
       }
     }
-    fetchData()
-  },[watchProvider,region,sortBy,genreId,displayGenres,voteCount,media_type]);
+    fetchData();
+  }, [
+    watchProvider,
+    region,
+    sortBy,
+    genreId,
+    displayGenres,
+    voteCount,
+    media_type,
+  ]);
+
   useEffect(() => {
-    async function fetchData() {      
+    async function fetchData() {
       if (displayMyList) {
         if (!myList) {
           return;
@@ -161,7 +172,8 @@ function Row({
       }
     }
     fetchData();
-  },[myList,media_type,displayMyList]);
+  }, [myList, media_type, displayMyList]);
+
   useEffect(() => {
     async function fetchData() {
       var results = [];
@@ -184,42 +196,63 @@ function Row({
           },
         };
         request = await axios.request(options);
-        if (searchFor === "movie" || searchFor === "tv") {
+        result = request.data.results;
+        for (let j = 0; j < result.length; j++) {
+          result[j].media_type = media_type;
+          if (!ids.includes(result[j].id)) {
+            results.push(result[j]);
+            ids.push(result[j].id);
+          }
+        }
+        const morePages = Math.min(3, request.data.total_pages);
+        for (let i = 2; i <= morePages; i++) {
+          options.params.page = i;
+          request = await axios.request(options);
           result = request.data.results;
           for (let j = 0; j < result.length; j++) {
-            result[j].media_type = media_type;
+            if (media_type != null) {
+              result[j].media_type = media_type;
+            }
             if (!ids.includes(result[j].id)) {
               results.push(result[j]);
               ids.push(result[j].id);
             }
           }
-          const morePages = Math.min(4, request.data.total_pages);
-          for (let i = 2; i <= morePages; i++) {
-            options.params.page = i;
-            request = await axios.request(options);
-            result = request.data.results;
-            for (let j = 0; j < result.length; j++) {
-              if (media_type != null) {
-                result[j].media_type = media_type;
-              }
-              if (!ids.includes(result[j].id)) {
-                results.push(result[j]);
-                ids.push(result[j].id);
-              }
-            }
-          }
-          results = shuffleArray(results);
-          // @ts-ignore
-          setMovies(results);
-          return;
         }
+        results = shuffleArray(results);
+        // @ts-ignore
+        setMovies(results);
         return;
       }
     }
     fetchData();
-  }, [query,searchFor,displaySearch,media_type]);
-  
-  
+  }, [query, searchFor, displaySearch, media_type]);
+
+  useEffect(() => {
+    async function fetchData() {
+      var request;
+      var options;
+      var result;
+      if (displayMoviesWith) {
+        options = {
+          method: "GET",
+          url: "https://api.themoviedb.org/3/discover/movie",
+          params: {
+            api_key: process.env.REACT_APP_API_KEY_TMDB,
+            with_people: person,
+          },
+        };
+        request = await axios.request(options);
+        result = request.data.results;
+        for (let i = 0; i < result.length; i++) {
+          result[i].media_type = media_type;
+        }
+        setMovies(result);
+      }
+    }
+    fetchData();
+  }, [displayMoviesWith, person, media_type]);
+
   const handleClick = (movie) => {
     if (movie.media_type != null) {
       if (click === movie) {
