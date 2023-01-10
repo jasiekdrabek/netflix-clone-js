@@ -2,6 +2,32 @@
 
 [netflix-clone-2910e.web.app](https://netflix-clone-2910e.web.app)
 
+# App overview
+
+This project is based on [Let's build Netflix 2.0 with REACT.JS! (Stripe Checkout & Webhooks, Redux, Firestore, Google Auth)] (https://www.youtube.com/watch?v=HW5roUF2RLg&t) tutorial.
+App features form tutorial:
+-home page with movies
+-signup/siginin screen
+-profile page, but instead of Stripe Checkout I have edit profile.
+
+Other app features:
+-movie/tv screen
+-my list screen
+-on click "play" move to play screen with trailer for chosen movie/tv series
+-searchbar(works for movies, tv series and people)
+
+# Used techonlogy and framewokrs
+
+**react**
+**tmdb api** to get details about movies.
+**firestore** db to store users.
+**redux** to mange user state.
+**react-router-dom** to navigate though pages
+**axios** to handle api requests.
+**react-youtube** to display youtube trailers.
+**react-infinite-scroller** to load more content when user scroll to end of page.
+**react-responsive-combo-box**   
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
