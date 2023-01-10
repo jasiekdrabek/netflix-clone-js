@@ -52,9 +52,10 @@ function ProfileScreen() {
       .set(selectedWatchProvider);
   };
 
-  return (
+  return (    
     <div className="profileScreen">
       <Nav />
+      <div className="profileScreen__background">
       <div className="profileScreen__body">
         <h1>Edit profile</h1>
 
@@ -113,7 +114,7 @@ function ProfileScreen() {
             )}
             onSelect={(option) => setSelectedRegionOption(option)}
             defaultValue={region?.region}
-            optionsListMaxHeight={100}
+            optionsListMaxHeight={150}
             enableAutocomplete
             style={{
               width: "15%",
@@ -140,7 +141,7 @@ function ProfileScreen() {
             )}
             onSelect={(option) => setSelectedWatchProviderOption(option)}
             defaultValue={watchProvider?.watchProviderName}
-            optionsListMaxHeight={100}
+            optionsListMaxHeight={300}
             enableAutocomplete
             style={{
               width: "15%",
@@ -154,8 +155,10 @@ function ProfileScreen() {
             Save change
           </button>
         </div>
-      </div>
+      </div> 
+      </div>     
     </div>
+    
   );
 }
 
