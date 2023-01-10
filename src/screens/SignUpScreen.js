@@ -28,6 +28,10 @@ function SignUpScreen() {
         db.collection("User watch provider")
           .doc(auth.currentUser?.uid)
           .set({ watchProviderId: "8", watchProviderName: "Netflix" });
+          db.collection("User avatar")
+          .doc(auth.currentUser?.uid)
+          .set({ avatar:"https://i.pinimg.com/564x/de/ec/1c/deec1c546541321a20403ad9cb5f5390.jpg"});
+
         navigate("/");
       })
       .catch((error) => alert(error));
