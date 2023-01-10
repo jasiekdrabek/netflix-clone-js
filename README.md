@@ -16,7 +16,7 @@ Other app features:
 - on click "play" move to play screen with trailer for chosen movie/tv series
 - searchbar(works for movies, tv series and people)
 
-# Used techonlogy and framewokrs
+## Used techonlogy and framewokrs
 
 - **react**
 - **tmdb api** to get details about movies.
