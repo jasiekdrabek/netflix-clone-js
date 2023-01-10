@@ -1,7 +1,7 @@
 .loginScreen {
   position: relative;
-  height:max-content ;
-  width: max-content;
+  height: 100hv;
+  width: 100wv;
   background: url("https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/netflixteaser.png")
     center no-repeat;
 }
