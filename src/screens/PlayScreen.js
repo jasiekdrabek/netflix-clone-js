@@ -58,32 +58,7 @@ function PlayScreen() {
     <div className="playScreen">
       <Nav />
       <YouTube className="yt__video" videoId={TrailerUrl} opts={opts} />
-      <div>
-        <a
-          className="magic__link"
-          href={`${process.env.REACT_APP_MAGIC_LINK1}${
-            movie?.name || movie?.title || movie?.original_name
-          }`}
-        >
-          Magick Link1
-        </a>
-        <a
-          className="magic__link"
-          href={`${process.env.REACT_APP_MAGIC_LINK2}${
-            movie?.name || movie?.title || movie?.original_name
-          }`}
-        >
-          Magic Link2
-        </a>
-        <a
-          className="magic__link"
-          href={`${process.env.REACT_APP_MAGIC_LINK3}${
-            movie?.name || movie?.title || movie?.original_name
-          }`}
-        >
-          Magic Link3
-        </a>
-      </div>
+      
     </div>
   );
 }
