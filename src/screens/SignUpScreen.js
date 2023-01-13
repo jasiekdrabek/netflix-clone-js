@@ -52,6 +52,7 @@ function SignUpScreen() {
 
   return (
     <div className="singUpScreen">
+      <h1 className="red">THIS IS NOT REAL NETFLIX ALL USERS DATA ARE STORED IN FIREBASE</h1>
       <form>
         <h1>Sign In</h1>
         <input ref={emailRef} type="email" placeholder="Email"></input>
