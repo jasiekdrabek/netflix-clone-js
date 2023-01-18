@@ -28,6 +28,42 @@ Other app features:
 - **react-infinite-scroller** to load more content when user scroll to end of page.
 - **react-responsive-combo-box**   
 
+## App screenshots
+
+![startPage](/screenshots/startPage.png)
+
+![signIn](/screenshots/signIn.png)
+
+![signUp](/screenshots/signUp.png)
+
+Standard login screen.
+
+![homePage](/screenshots/homePage.png)
+
+![moviesPage](/screenshots/moviesPage.png)
+
+![tvSeriesPage](/screenshots/tvSeriesPage.png)
+
+home movies and tvSeries screens are very similar. We have navbar, which can be seen only on hover or when user scroll dawn.
+then we have banner, whitch is different every time user enter the page. When user get almost to the bottom new categories are loaded.
+Clicking on poster revail details about movie/tv series, where user can click play to watch trailer or add
+to/remove from my list.
+
+![myList](/screenshots/myListPage.png)
+
+my list screen.
+
+![profile](/screenshots/profile.png)  
+
+profile screen where user can edit region, watch provider and avatar.
+
+![search](search.png)
+
+Example of search screen when user type: "driver". In results we have movies, tv series and people.
+When user clik on person movies with that person apears.
+
+  
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
