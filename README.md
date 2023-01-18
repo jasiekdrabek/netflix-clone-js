@@ -1,6 +1,6 @@
 # App deploy on firebase
 
-[netflix-clone-2910e.web.app](https://netflix-clone-2910e.web.app)
+[netflix-clone](https://netflix-clone-2910e.firebaseapp.com/)
 
 # App overview
 
