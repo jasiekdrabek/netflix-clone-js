@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "./SignUpScreen.css";
 import db, { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 function SignUpScreen() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const [signIn, setSignIn] = useState(true) 
   const navigate = useNavigate();
 
   const register = (e) => {
@@ -37,7 +38,7 @@ function SignUpScreen() {
       .catch((error) => alert(error));
   };
 
-  const signIn = (e) => {
+  const Login = (e) => {
     e.preventDefault();
     auth
       .signInWithEmailAndPassword(
@@ -50,21 +51,29 @@ function SignUpScreen() {
       .catch((error) => alert(error));
   };
 
+  const handleClick = (e) =>{
+    e.preventDefault();
+    if(signIn){
+      Login(e);
+    }else{
+      register(e);
+    }
+  }
+
   return (
     <div className="singUpScreen">
       <h1 className="red">THIS IS NOT REAL NETFLIX ALL USERS DATA ARE STORED IN FIREBASE</h1>
       <form>
-        <h1>Sign In</h1>
+        <h1>{signIn ? 'Sign In' : 'Sign Up'}</h1>
         <input ref={emailRef} type="email" placeholder="Email"></input>
         <input ref={passwordRef} type="password" placeholder="Password"></input>
-        <button type="submit" onClick={signIn}>
+        <button type="submit" onClick={handleClick}>
           Submit
         </button>
         <h4>
-          <span className="signUpScreen__grey">New to Netflix?</span>
-          <span className="signUpScreen__link" onClick={register}>
-            {" "}
-            Sign Up now.
+          {signIn ? <span className="signUpScreen__grey">New to Netflix?</span>:''}
+          <span className="signUpScreen__link" onClick= {()=> setSignIn(!signIn)}>
+            {signIn ? ' Sign Up now.': 'I already have an account'}            
           </span>
         </h4>
       </form>
