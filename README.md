@@ -57,7 +57,7 @@ my list screen.
 
 profile screen where user can edit region, watch provider and avatar.
 
-![search](search.png)
+![search](/screenshots/search.png)
 
 Example of search screen when user type: "driver". In results we have movies, tv series and people.
 When user clik on person movies with that person apears.
