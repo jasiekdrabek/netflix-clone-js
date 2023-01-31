@@ -4,7 +4,7 @@
 
 # App overview
 
-This project is based on [Let's build Netflix 2.0 with REACT.JS!](Stripe Checkout & Webhooks, Redux, Firestore, Google Auth)] (https://www.youtube.com/watch?v=HW5roUF2RLg&t) tutorial. <br />
+This project is based on [Let's build Netflix 2.0 with REACT.JS!](Stripe Checkout & Webhooks, Redux, Firestore, Google Auth)](https://www.youtube.com/watch?v=HW5roUF2RLg&t) tutorial. <br />
 App features form tutorial:
 - home page with movies
 - signup/siginin screen
