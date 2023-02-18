@@ -192,7 +192,7 @@ function Banner({ number = 0 }) {
           </button>
         </h1>
       </div>
-      <div className="banner--fadeBottom" />
+      <div className="banner__fadeBottom" />
     </header>
   );
 }

@@ -57,8 +57,7 @@ function PlayScreen() {
   return (
     <div className="playScreen">
       <Nav />
-      <YouTube className="yt__video" videoId={TrailerUrl} opts={opts} />
-      
+      <YouTube className="playScreen__video" videoId={TrailerUrl} opts={opts} />
     </div>
   );
 }
