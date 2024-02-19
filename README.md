@@ -1,6 +1,6 @@
 # App deploy on firebase
 
-[netflix-clone](https://netflix-clone-2910e.firebaseapp.com/)
+[netflix-clone](https://jan-netflix-clone.netlify.app)
 
 # App overview
 
