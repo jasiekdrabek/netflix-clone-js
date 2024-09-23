@@ -17,11 +17,9 @@ function LoginScreen() {
         <div className="loginScreen__body">
           {!signIn ? (
             <>
-              <h2>Unlimited films, tv programes and more.</h2>
-              <h2>Watch anywhere. Cancel any time.</h2>
+              <h2>Search films, tv programes and more.</h2>
               <h3>
-                Ready to watch? Enter your email to create or restart your
-                membership
+                Ready to browse? Enter your email to create account
               </h3>
               <div className="loginScreen__input">
                 <form>
