@@ -65,9 +65,6 @@ function SignUpScreen() {
 
   return (
     <div className="singUpScreen">
-      <h1 className="red">
-        THIS IS NOT REAL NETFLIX ALL USERS DATA ARE STORED IN FIREBASE
-      </h1>
       <form>
         <h1>{signIn ? "Sign In" : "Sign Up"}</h1>
         <input ref={emailRef} type="email" placeholder="Email"></input>
@@ -77,7 +74,7 @@ function SignUpScreen() {
         </button>
         <h4>
           {signIn ? (
-            <span className="signUpScreen__grey">New to Netflix?</span>
+            <span className="signUpScreen__grey">New to Flix?</span>
           ) : (
             <span className="signUpScreen__grey">Already have an account?</span>
           )}

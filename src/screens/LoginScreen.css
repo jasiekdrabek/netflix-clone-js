@@ -1,20 +1,20 @@
 .loginScreen {
   height: 100vh;  
-  background-color: black;
+  background-color: #90cea1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.loginScreen__background{
-  height: fit-content;
-  
-  background: url("https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/netflixteaser.png")
-  center no-repeat;
-  
-   
+
+.loginScreen__background {
+  background-color: #90cea1;
 }
 
 .loginScreen__logo {
   position: fixed;
   left: 0;
-  width: 150px;
+  top:0;
+  width: 450px;
   object-fit: contain;
   padding-left: 20px;
 }
@@ -39,6 +39,7 @@
   margin-right: auto;
   z-index: 1;
   color: #fff;
+  background-color: #0d253f;
   padding: 20px;
 }
 

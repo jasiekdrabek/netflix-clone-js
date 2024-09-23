@@ -6,21 +6,17 @@ function LoginScreen() {
   const [signIn, setSignIn] = useState(false);
   return (
     <div className="loginScreen">
-      <img
+        <img
          className="loginScreen__logo"
-          src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
+          src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_1-5bdc75aaebeb75dc7ae79426ddd9be3b2be1e342510f8202baf6bffa71d7f5c4.svg"
           alt=""
         />
-        
-      <div className="loginScreen__background ">
+      <div className="loginScreen__background">
         
 
         <div className="loginScreen__body">
           {!signIn ? (
             <>
-              <h1 className="red">
-                THIS IS NOT REAL NETFLIX ALL USERS DATA ARE STORED IN FIREBASE
-              </h1>
               <h2>Unlimited films, tv programes and more.</h2>
               <h2>Watch anywhere. Cancel any time.</h2>
               <h3>
