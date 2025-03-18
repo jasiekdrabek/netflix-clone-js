@@ -21,16 +21,12 @@ function LoginScreen() {
               <h3>
                 Ready to browse? Enter your email to create account
               </h3>
-              <div className="loginScreen__input">
-                <form>
                   <button
                     className="loginScreen__gestarted"
                     onClick={() => setSignIn(true)}
                   >
                     GET STARTED
                   </button>
-                </form>
-              </div>
             </>
           ) : (
             <SignUpScreen />
