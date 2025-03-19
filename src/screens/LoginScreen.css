@@ -7,36 +7,30 @@
   flex-direction: column;
 }
 
-/* Poprawiona widoczność logo */
 .loginScreen__logo {
   position: fixed;
   left: 20px;
   top: 20px;
-  width: 180px; /* Zmniejszone dla lepszej estetyki */
+  width: 180px;
   object-fit: contain;
-  filter: drop-shadow(
-    2px 2px 4px rgba(0, 0, 0, 0.2)
-  ); /* Efekt cienia dla lepszej czytelności */
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
 }
 
-/* Tło strony */
 .loginScreen__background {
-  background-color: transparent; /* Usunięcie powielonego tła */
+  background-color: transparent;
 }
 
-/* Styl dla kontenera głównego */
 .loginScreen__body {
   text-align: center;
   max-width: 500px;
   padding: 40px;
   z-index: 1;
   color: #fff;
-  background-color: rgba(13, 37, 63, 0.95); /* Subtelnie przezroczyste */
+  background-color: rgba(13, 37, 63, 0.95);
   border-radius: 12px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Nagłówki */
 .loginScreen__body > h1 {
   font-size: 2.8rem;
   margin-bottom: 15px;
